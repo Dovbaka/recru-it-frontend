@@ -1,0 +1,16 @@
+.formBox {
+  max-width: 600px;
+
+  .title {
+    padding-bottom: 70px;
+    color: #4285F4;
+  }
+
+  .buttonBox {
+    padding-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

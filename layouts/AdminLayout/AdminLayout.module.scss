@@ -1,0 +1,21 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.contentContainer {
+    display: flex;
+    flex: 1;
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 80px;
+}
