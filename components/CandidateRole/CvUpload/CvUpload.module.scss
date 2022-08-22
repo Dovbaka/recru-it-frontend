@@ -1,0 +1,72 @@
+.dropzone {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  outline: none;
+  animation: pulse 1s infinite;
+  width: 300px;
+  height: 135px;
+
+  .dropZoneDashedBox {
+    background: #4285f4;
+    width: 300px;
+    height: 135px;
+    display: inline-flex;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+
+    h5 {
+      text-transform: uppercase;
+      font-size: 32px;
+      line-height: 42px;
+    }
+
+    .dropZoneText {
+      max-width: 80%;
+    }
+
+    .disabledText {
+      color: #ffffff;
+    }
+  }
+
+  .disabledBox {
+    border: none;
+  }
+}
+.disabledParentBox {
+  box-shadow: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .dropzoneGrid {
+    .dropzone {
+      .dropZoneDashedBox {
+        width: 243px;
+        height: 109px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dropzoneGrid {
+    .dropzone {
+      margin-top: 29px;
+    }
+  }
+}

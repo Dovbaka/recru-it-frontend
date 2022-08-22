@@ -1,0 +1,48 @@
+.answerComponent {
+  border-radius: 5px;
+  height: 27px;
+  padding-left: 4px;
+  padding-right: 16px;
+  margin-left: 0;
+  margin-bottom: 16px;
+
+  &:hover {
+    color: #ffffff;
+    background: #4285f4b0;
+  }
+}
+.answerComponent .checkboxPadding {
+  padding: 0;
+  margin-right: 10px;
+}
+.answerComponent .label {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+}
+@media (max-width: 600px) {
+  .answerComponent {
+    margin-right: 16px !important;
+    margin-bottom: 16px !important;
+    background: #e5e5e5;
+  }
+}
+
+.answerBackgroundChecked {
+  background: #4285f4;
+  color: white;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: #BBD5FF;
+    }
+  }
+}

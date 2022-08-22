@@ -1,0 +1,13 @@
+.container {
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  span {
+    color: #4285f4;
+  }
+}

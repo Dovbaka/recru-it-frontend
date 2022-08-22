@@ -2,7 +2,7 @@ import classes from './Header.module.scss';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../store/store';
-import { actions } from '../../store/Recruit/actions';
+import { actions } from '../../store/recruit/actions';
 import { Avatar, Container, Typography } from '@mui/material';
 
 const Header = () => {

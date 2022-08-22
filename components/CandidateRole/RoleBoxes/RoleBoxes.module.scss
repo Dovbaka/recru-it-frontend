@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 600px;
+
+  .roleGridItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

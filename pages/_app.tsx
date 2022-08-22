@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import '../styles/globals.css';
 import MaterialUiTheme from '../theme/index';
 import { Provider } from 'react-redux';
-import store from '../redux/store';
+import store from '../store/store';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   React.useEffect(() => {
@@ -16,19 +16,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-      <>
-        <Head>
-          <title>Page</title>
-          <meta
-              name="viewport"
-              content="minimum-scale=1, initial-scale=1, width=device-width"
-          />
-        </Head>
-          <Provider store={store}>
-            <MaterialUiTheme>
-              <Component {...pageProps} />
-            </MaterialUiTheme>
-          </Provider>
-      </>
+    <>
+      <Head>
+        <title>Page</title>
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+      </Head>
+      <Provider store={store}>
+        <MaterialUiTheme>
+          <Component {...pageProps} />
+        </MaterialUiTheme>
+      </Provider>
+    </>
   );
 }

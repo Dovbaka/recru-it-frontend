@@ -1,0 +1,32 @@
+$variable: #bdbdbd;
+
+.title {
+  padding-bottom: 16px;
+}
+
+.hl {
+  margin-top: 16px;
+  height: 2px;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(to right, #ffffff 0%, $variable 25%, $variable 75%, #ffffff 100%); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    to right top,
+    right top,
+    color-stop(0%, #ffffff),
+    color-stop(25%, $variable),
+    color-stop(75%, $variable),
+    color-stop(100%, #ffffff)
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    to right,
+    #ffffff 0%,
+    $variable 25%,
+    $variable 75%,
+    #ffffff 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(to right, #ffffff 0%, $variable 25%, $variable 75%, #ffffff 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(to right, #ffffff 0%, $variable 25%, $variable 75%, #ffffff 100%); /* IE10+ */
+  background: linear-gradient(to right, #ffffff 0%, $variable 25%, $variable 75%, #ffffff 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
+}

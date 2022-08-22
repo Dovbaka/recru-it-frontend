@@ -1,0 +1,4 @@
+export const SET_USER_INFO = 'SET_USER_INFO';
+export const SET_USER_ROLE = 'SET_USER_ROLE';
+export const SET_USER_FILE = 'SET_USER_FILE';
+export const CLEAR_SEARCH_PARAMS = 'CLEAR_SEARCH_PARAMS';

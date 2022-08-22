@@ -1,7 +1,5 @@
 import { RecruitActionsType } from './actions';
-import {
-  CLEAR_SEARCH_PARAMS,
-} from './actionTypes';
+import { CLEAR_SEARCH_PARAMS, SET_USER_FILE, SET_USER_INFO, SET_USER_ROLE } from './actionTypes';
 import { categoriesScoreType, UserDataType, UserInfoType } from '../../types/types';
 
 const initialState = {
@@ -19,6 +17,24 @@ const RecruitReducer = (state = initialState, action: RecruitActionsType) => {
       return {
         ...state,
         searchParams: null,
+      };
+
+    case SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+
+    case SET_USER_ROLE:
+      return {
+        ...state,
+        userRole: action.payload,
+      };
+
+    case SET_USER_FILE:
+      return {
+        ...state,
+        userFile: action.payload,
       };
 
     default:
