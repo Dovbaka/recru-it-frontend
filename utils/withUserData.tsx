@@ -17,8 +17,6 @@ const withUserData = <P extends object>(WrappedComponent: React.ComponentType<P>
       if (userInfo.email && (!userFile || !userRole)) router.push('/role');
     }, [userInfo, userFile, userRole]);
 
-    if (!verified) return <div />;
-
     return <WrappedComponent {...props} />;
   };
 };
