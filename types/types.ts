@@ -1,19 +1,20 @@
-export interface Result {
+export interface Answer {
     id: string;
     question: string;
     answerText: string;
     answerValue: number;
-    category: CategoriesType;
+    category: CategoriesEnum;
 }
 
-export type CategoriesType =
-    | 'EXPERIENCE'
-    | 'QUALIFICATION'
-    | 'SELF-SUFFICIENCY'
-    | 'STRESS TOLERANCE'
-    | 'COMMUNICABILITY'
-    | 'CREATIVITY'
-    | 'RATIONALITY'
+export enum CategoriesEnum {
+    EXPERIENCE = 'EXPERIENCE',
+    QUALIFICATION = 'QUALIFICATION',
+    SELF_SUFFICIENCY = 'SELF_SUFFICIENCY',
+    STRESS_TOLERANCE = 'STRESS_TOLERANCE',
+    COMMUNICABILITY = 'COMMUNICABILITY',
+    CREATIVITY = 'CREATIVITY',
+    RATIONALITY = 'RATIONALITY',
+}
 
 export interface UserInfoType {
     firstName: string;
@@ -30,7 +31,7 @@ export interface UserDataType {
     phoneNumber: string;
     role: number;
     status: string;
-    answers: Result[];
+    answers: Answer[];
     creationDate: Date;
     fileName: string;
     comment: string;
@@ -50,6 +51,6 @@ export type categoriesScoreType = {
 export type TestType = {
     id: string;
     question: string;
-    category: CategoriesType;
+    category: CategoriesEnum;
     answers: { id: string; text: string; value: number }[];
 }

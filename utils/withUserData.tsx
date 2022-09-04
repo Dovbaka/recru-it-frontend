@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
 import { AppStateType } from '../store/store';
-import {useLayoutEffect} from 'react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 //Redirect to home page if no user data saved in store
 const withUserData = <P extends object>(WrappedComponent: React.ComponentType<P>) => {
@@ -11,12 +10,21 @@ const withUserData = <P extends object>(WrappedComponent: React.ComponentType<P>
     const userFile = useSelector((state: AppStateType) => state.RecruitReducer.userFile);
     const userInfo = useSelector((state: AppStateType) => state.RecruitReducer.userInfo);
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
 
-    useLayoutEffect(() => {
-      if (!userInfo.email) router.push('/');
-      if (userInfo.email && (!userFile || !userRole)) router.push('/role');
+    useEffect(() => {
+      if (!userInfo.email) {
+        router.replace('/');
+        return;
+      }
+      if ((!userFile || !userRole) && router.pathname === '/test') {
+        router.replace('/role');
+        return;
+      }
+      setLoading(false);
     }, [userInfo, userFile, userRole]);
 
+    if (loading) return null; //Prevent component flesh if redirect will fire up
     return <WrappedComponent {...props} />;
   };
 };

@@ -1,18 +1,19 @@
 import Question from './Question/Question';
 import React, { useRef } from 'react';
-import { Result, TestType } from '../../types/types';
+import { Answer, TestType } from '../../types/types';
 import classes from './Questionnaire.module.scss';
 import { Button, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../store/store';
 import { useRouter } from 'next/router';
+import { setProfileAnswers } from '../../store/recruit/actions';
 
 interface PropTypes {
   testData: TestType[];
 }
 
 const Questionnaire = ({ testData }: PropTypes) => {
-  const resultArray = useRef([] as Result[]);
+  const resultArray = useRef([] as Answer[]);
   const dispatch = useDispatch();
   const router = useRouter();
   const userInfo = useSelector((state: AppStateType) => state.RecruitReducer.userInfo);
@@ -25,7 +26,7 @@ const Questionnaire = ({ testData }: PropTypes) => {
     if (resultArray.current.length < testData.length) {
       //setMessage(`You answered ${resultArray.length}/${testData.length} questions`);
     }
-    console.log(resultArray);
+    /*console.log(resultArray);
     console.log(
       userId,
       userInfo.firstName,
@@ -36,8 +37,21 @@ const Questionnaire = ({ testData }: PropTypes) => {
       resultArray,
       userFile?.name,
       userFile,
-    );
-    router.push('/done');
+    );*/
+    if (userRole && userFile) {
+      dispatch(
+        setProfileAnswers(
+          userInfo.firstName,
+          userInfo.lastName,
+          userInfo.email,
+          userInfo.phone,
+          userRole,
+          resultArray.current,
+          userFile.name,
+        ),
+      );
+    }
+    //router.push('/done');
   };
 
   return (

@@ -5,7 +5,7 @@ export const questions = [
         id: '1Q1',
         question:
             'Ви витрачаєте багато свого вільного часу, досліджуючи різні випадкові теми, які викликають у вас інтерес',
-        category: 'SELF-SUFFICIENCY',
+        category: 'SELF_SUFFICIENCY',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 2 },
             { id: '2', text: 'Швидше згоден', value: 1 },
@@ -30,7 +30,7 @@ export const questions = [
         id: '1Q3',
         question:
             'Вам легко залишатися врівноваженим та сконцентрованим навіть у напруженій обстановці',
-        category: 'STRESS TOLERANCE',
+        category: 'STRESS_TOLERANCE',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 2 },
             { id: '2', text: 'Швидше згоден', value: 1 },
@@ -42,7 +42,7 @@ export const questions = [
     {
         id: '1Q4',
         question: 'Бути організованим вам важливіше, ніж вміти пристосуватися',
-        category: 'SELF-SUFFICIENCY',
+        category: 'SELF_SUFFICIENCY',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 0.1 },
             { id: '2', text: 'Швидше згоден', value: 0.3 },
@@ -91,7 +91,7 @@ export const questions = [
         id: '1Q8',
         question:
             'Ваш стиль роботи можна швидше охарактеризувати як безладні сплески енергії, а не методична та організована діяльність',
-        category: 'SELF-SUFFICIENCY',
+        category: 'SELF_SUFFICIENCY',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 0.1 },
             { id: '2', text: 'Швидше згоден', value: 0.3 },
@@ -117,7 +117,7 @@ export const questions = [
         id: '1Q10',
         question:
             'Вам легко залишатися врівноваженим та сконцентрованим навіть у напруженій обстановці',
-        category: 'STRESS TOLERANCE',
+        category: 'STRESS_TOLERANCE',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 2 },
             { id: '2', text: 'Швидше згоден', value: 1 },
@@ -129,7 +129,7 @@ export const questions = [
     {
         id: '1Q11',
         question: 'Ви не дозволяєте іншим людям впливати на ваші дії',
-        category: 'STRESS TOLERANCE',
+        category: 'STRESS_TOLERANCE',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 2 },
             { id: '2', text: 'Швидше згоден', value: 1 },
@@ -178,7 +178,7 @@ export const questions = [
     {
         id: '1Q15',
         question: 'Вам не складно встановлювати особистий графік та дотримуватися його',
-        category: 'SELF-SUFFICIENCY',
+        category: 'SELF_SUFFICIENCY',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 2 },
             { id: '2', text: 'Швидше згоден', value: 1 },
@@ -214,7 +214,7 @@ export const questions = [
     {
         id: '1Q18',
         question: 'Ви дуже переживаєте у стресових ситуаціях.',
-        category: 'STRESS TOLERANCE',
+        category: 'STRESS_TOLERANCE',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 0.1 },
             { id: '2', text: 'Швидше згоден', value: 0.3 },
@@ -227,7 +227,7 @@ export const questions = [
         id: '1Q19',
         question:
             'У вас є звичка відкладати все на потім, допоки вже не вистачає часу все зробити.',
-        category: 'SELF-SUFFICIENCY',
+        category: 'SELF_SUFFICIENCY',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 0.1 },
             { id: '2', text: 'Швидше згоден', value: 0.3 },
@@ -305,7 +305,7 @@ export const questions = [
         id: '1Q25',
         question:
             'Якщо щось йде не за планом ви починаєте переживати',
-        category: 'STRESS TOLERANCE',
+        category: 'STRESS_TOLERANCE',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 0.1 },
             { id: '2', text: 'Швидше згоден', value: 0.3 },

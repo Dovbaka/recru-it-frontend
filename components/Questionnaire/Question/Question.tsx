@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import AnswerCheckboxes from './AnswerCheckboxes/AnswerCheckboxes';
 import classes from './Question.module.scss';
-import { Result, TestType } from '../../../types/types';
+import { Answer, TestType } from '../../../types/types';
 import { RadioGroup, Typography } from '@mui/material';
 
 interface PropTypes {
   testData: TestType;
-  resultArray: Result[];
+  resultArray: Omit<Answer, 'id'>[];
 }
 
 const RadioQuiz = ({ testData, resultArray }: PropTypes) => {
@@ -23,13 +23,12 @@ const RadioQuiz = ({ testData, resultArray }: PropTypes) => {
     const answer = testData.answers.find(el => el.id === answerId);
 
     if (answer) {
-      const inResultIndex = resultArray.findIndex(obj => obj.id === testData.id);
+      const inResultIndex = resultArray.findIndex(obj => obj.question === testData.question);
       if (inResultIndex >= 0) {
         resultArray[inResultIndex].answerText = answer.text;
         resultArray[inResultIndex].answerValue = answer.value;
       } else {
         resultArray.push({
-          id: testData.id,
           question: testData.question,
           answerText: answer.text,
           answerValue: answer.value,

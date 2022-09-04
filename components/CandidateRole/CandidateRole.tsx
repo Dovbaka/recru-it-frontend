@@ -33,4 +33,4 @@ const CandidateRole = () => {
   );
 };
 
-export default withUserData(CandidateRole);
+export default CandidateRole;
