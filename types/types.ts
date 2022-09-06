@@ -35,10 +35,6 @@ export interface UserDataType {
     creationDate: Date;
     fileName: string;
     comment: string;
-    categoriesScore: categoriesScoreType
-}
-
-export type categoriesScoreType = {
     experience: number;
     qualification: number;
     selfSufficiency: number;

@@ -1,0 +1,41 @@
+.formBox {
+    height: 100%;
+    width: 300px;
+}
+
+@media screen and (max-width: 390px) {
+    .formBox {
+        width: 80%;
+    }
+}
+.header {
+    margin: 40px 0 56px;
+    font-weight: 400;
+}
+.emailGridItem {
+    margin-bottom: 26px;
+}
+.passwordGridItem {
+    margin-bottom: 175px;
+}
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    .loginButton {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        .customButton {
+            height: 39px;
+            width: 186px;
+            min-width: 20px;
+            border-radius: 5px;
+            background: #4285f4;
+            color: #fff;
+        }
+        .pending {
+            background: #cbcbcb;
+            cursor: default;
+        }
+    }
+}

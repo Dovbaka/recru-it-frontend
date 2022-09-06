@@ -1,0 +1,37 @@
+.contentBox {
+  height: 100%;
+
+  .sortButtons {
+    margin-bottom: 30px;
+    padding: 24px 24px 0;
+
+    .sortButton {
+      margin-right: 30px;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .buttonText {
+        text-transform: none;
+        margin-right: 8px;
+        color: #7E7E7E;
+      }
+      .blackBtnText {
+        color: #000;
+      }
+      .polygon {
+
+      }
+      .rotatedPolygon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .recruitItems {
+    overflow-y: auto;
+    padding: 0 24px;
+    height: calc(100vh - 166px);
+  }
+}

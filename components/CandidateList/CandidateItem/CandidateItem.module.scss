@@ -1,0 +1,115 @@
+.mainContainer {
+  background: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 16px 16px 22px 16px;
+  width: 100%;
+  margin-bottom: 24px;
+  min-height: 280px;
+  max-height: 280px;
+  position: relative;
+
+  .comment {
+
+  }
+
+  .saveButton {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    height: 44px;
+    width: 162px;
+    border-radius: 5px;
+    background: #4285F4;
+    color: white;
+  }
+
+  .disabled {
+    background: #CBCBCB;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  .textGridItem {
+    display: flex;
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .titleBox {
+      font-weight: 700;
+      text-transform: none;
+
+      p {
+        text-transform: none;
+      }
+    }
+  }
+
+  .controlIconBox {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .closeIcon, .commentIcon {
+    position: absolute;
+    right: 56px;
+  }
+
+  .closeIcon {
+    bottom: 20px;
+  }
+
+  .commentIcon {
+    bottom: 14px;
+  }
+
+  .typedCommentIcon {
+    path{
+      fill: #4285F4;
+    }
+  }
+
+  .commentIcon:hover, .closeIcon:hover {
+    path{
+      fill: #0869ff;
+    }
+  }
+
+  .deleteIcon {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+  }
+  .deleteIcon:hover {
+    path{
+      fill: #ff6363;
+    }
+  }
+  .infoBox {
+    width: 100%;
+    overflow: hidden;
+  }
+  .email {
+    text-transform: lowercase;
+  }
+
+  .statusDateBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .dateText {
+    color: #7E7E7E;
+  }
+
+  .surveyText {
+    margin-bottom: 20px;
+  }
+}

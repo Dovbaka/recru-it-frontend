@@ -12,12 +12,6 @@ interface PropTypes {
 const RadioQuiz = ({ testData, resultArray }: PropTypes) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
-  const answers = testData.answers.map(element => (
-    <AnswerCheckboxes currentValue={selectedAnswer} key={element.text} value={element.id}>
-      {element.text}
-    </AnswerCheckboxes>
-  ));
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const answerId = (event.target as HTMLInputElement).value;
     const answer = testData.answers.find(el => el.id === answerId);
@@ -51,7 +45,11 @@ const RadioQuiz = ({ testData, resultArray }: PropTypes) => {
         value={selectedAnswer}
         onChange={handleChange}
       >
-        {answers}
+        {testData.answers.map(element => (
+          <AnswerCheckboxes currentValue={selectedAnswer} key={element.text} value={element.id}>
+            {element.text}
+          </AnswerCheckboxes>
+        ))}
       </RadioGroup>
       <div className={classes.hl} />
     </div>

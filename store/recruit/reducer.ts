@@ -1,6 +1,12 @@
-import { RecruitActionsType } from './actions';
-import { CLEAR_SEARCH_PARAMS, SET_USER_FILE, SET_USER_INFO, SET_USER_ROLE } from './actionTypes';
-import { categoriesScoreType, UserDataType, UserInfoType } from '../../types/types';
+import {RecruitActionsType} from './actions';
+import {
+  CLEAR_SEARCH_PARAMS,
+  GET_CANDIDATES_DATA_SUCCESS,
+  SET_USER_FILE,
+  SET_USER_INFO,
+  SET_USER_ROLE
+} from './actionTypes';
+import {UserDataType, UserInfoType} from '../../types/types';
 
 const initialState = {
   userInfo: {} as UserInfoType,
@@ -8,11 +14,16 @@ const initialState = {
   userFile: null as File | null,
   userData: [] as UserDataType[],
   testIsSend: false,
-  searchParams: undefined as categoriesScoreType | null | undefined,
+  searchParams: undefined as UserDataType | null | undefined,
 };
 
 const RecruitReducer = (state = initialState, action: RecruitActionsType) => {
   switch (action.type) {
+    case GET_CANDIDATES_DATA_SUCCESS:
+      return {
+        ...state,
+        userData: action.payload,
+      };
     case CLEAR_SEARCH_PARAMS:
       return {
         ...state,

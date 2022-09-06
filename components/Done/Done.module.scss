@@ -1,0 +1,43 @@
+.doneContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: #FDFDFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+
+    h1 {
+        font-family: Poppins, serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 48px;
+        color: #333333;
+        text-transform: unset;
+        padding-bottom: 16px;
+    }
+
+    h2 {
+        font-family: Poppins, serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 36px;
+        line-height: 149.99%;
+        text-align: center;
+        color: #333333;
+        text-transform: unset;
+        padding-bottom: 8px;
+    }
+    h4 {
+        font-family: Poppins, serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 149.99%;
+        text-align: center;
+        color: #7E7E7E;
+        text-transform: unset;
+        padding-bottom: 42px;
+    }
+}
