@@ -26,18 +26,6 @@ const Questionnaire = ({ testData }: PropTypes) => {
     if (resultArray.current.length < testData.length) {
       //setMessage(`You answered ${resultArray.length}/${testData.length} questions`);
     }
-    /*console.log(resultArray);
-    console.log(
-      userId,
-      userInfo.firstName,
-      userInfo.lastName,
-      userInfo.email,
-      userInfo.phone,
-      userRole,
-      resultArray,
-      userFile?.name,
-      userFile,
-    );*/
     if (userRole && userFile) {
       dispatch(
         setProfileAnswers(
@@ -47,7 +35,7 @@ const Questionnaire = ({ testData }: PropTypes) => {
           userInfo.phone,
           userRole,
           resultArray.current,
-          userFile.name,
+          userFile,
         ),
       );
     }

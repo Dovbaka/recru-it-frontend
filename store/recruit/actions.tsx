@@ -22,10 +22,13 @@ export const setProfileAnswers =
     phoneNumber: string,
     role: number,
     answers: Answer[],
-    fileName: string,
+    file: File,
   ): ThunkAction<void, AppStateType, unknown, AnyAction> =>
   async dispatch => {
     try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const awsResponse = await API.post('user/file', formData);
       await API.post('answer', {
         userData: {
           firstName: firstName,
@@ -50,7 +53,7 @@ export const setProfileAnswers =
             .reduce((sum, el) => sum + el.answerValue, 0),
           creativity: answers.filter(el => el.category === 'CREATIVITY').reduce((sum, el) => sum + el.answerValue, 0),
           rationality: answers.filter(el => el.category === 'RATIONALITY').reduce((sum, el) => sum + el.answerValue, 0),
-          fileName: fileName,
+          cvUrl: awsResponse.data.Location,
         },
         answersData: answers,
       });
@@ -64,10 +67,8 @@ export const setProfileAnswers =
 export const getCandidates = (): ThunkAction<void, AppStateType, unknown, AnyAction> => async dispatch => {
   try {
     const data = (await API.get('user')).data as UserDataType[];
-    console.log(data);
     return dispatch(actions.getCandidatesSuccess(data));
   } catch (err) {
-    console.log(err);
     return dispatch(actions.getCandidatesFail());
   }
 };

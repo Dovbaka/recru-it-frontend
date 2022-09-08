@@ -33,7 +33,7 @@ export interface UserDataType {
     status: string;
     answers: Answer[];
     creationDate: Date;
-    fileName: string;
+    cvUrl: string;
     comment: string;
     experience: number;
     qualification: number;

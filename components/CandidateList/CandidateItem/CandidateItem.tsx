@@ -132,11 +132,9 @@ const CandidateItem = ({ data }: { data: UserDataType }) => {
         </Grid>
         <Grid item className={classes.textGridItem} style={{ margin: 0 }}>
           <div className={classes.infoBox}>
-            <FileSVG
-              onClick={() => {
-                //dispatch(getProfileFile(data?.id, data?.fileName))
-              }}
-            />
+            <a href={data.cvUrl} rel="noopener noreferrer" target="_blank">
+              <FileSVG />
+            </a>
           </div>
         </Grid>
       </Grid>
