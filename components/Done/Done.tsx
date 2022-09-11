@@ -1,18 +1,27 @@
-import React  from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import classes from './Done.module.scss';
 import { DoneIcon } from '../SVG/DoneIcon';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../store/recruit/actions';
 
 const Done = () => {
+  const dispatch = useDispatch();
 
-    return (
-        <div className={classes.doneContainer}>
-            <Typography variant={'h1'}>Готово!</Typography>
-            <Typography variant={'h2'}>Ви зареєстровані в нашій базі кандидатів! </Typography>
-            <Typography variant={'h4'}>Представник нашого HR відділу зявжется з вами</Typography>
-            <DoneIcon />
-        </div>
-    );
+  useEffect(() => {
+    return () => {
+      dispatch(actions.clearRecruit());
+    };
+  }, []);
+
+  return (
+    <div className={classes.doneContainer}>
+      <Typography variant={'h1'}>Done!</Typography>
+      <Typography variant={'h2'}>You are registered in our database of candidates!</Typography>
+      <Typography variant={'h4'}>A representative of our HR department will contact you</Typography>
+      <DoneIcon />
+    </div>
+  );
 };
 
 export default Done;

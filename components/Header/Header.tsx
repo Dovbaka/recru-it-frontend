@@ -1,14 +1,12 @@
 import classes from './Header.module.scss';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppStateType } from '../../store/store';
-import { actions } from '../../store/recruit/actions';
-import { Avatar, Container, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../store/auth/actions';
+import { Avatar, Button, Container, Typography } from '@mui/material';
 
 const Header = () => {
   const profileName = 'Admin';
   const dispatch = useDispatch();
-  const searchParams = useSelector((state: AppStateType) => state.RecruitReducer.searchParams);
 
   const writeInitials = () => {
     const nameWords = profileName.split(' ');
@@ -24,14 +22,6 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <Container className={classes.container}>
-        <div className={classes.buttonBox}>
-          {searchParams && (
-            <button className={classes.cancel} onClick={() => dispatch(actions.clearSearchParams())}>
-              X
-            </button>
-          )}
-        </div>
-
         <div className={classes.avatarContainer}>
           <div className={classes.avatarBox}>
             <Avatar>
@@ -40,9 +30,9 @@ const Header = () => {
               </Typography>
             </Avatar>
           </div>
-          <Typography className={classes.logOut} color="primary" variant="h6">
+          <Button className={classes.logOut} color="primary" onClick={() => dispatch(actions.logOut())}>
             Exit
-          </Typography>
+          </Button>
         </div>
       </Container>
     </header>

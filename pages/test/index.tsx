@@ -2,12 +2,12 @@ import React from 'react';
 import classes from '../../styles/Test.module.scss';
 import Questionnaire from '../../components/Questionnaire/Questionnaire';
 import { questions } from '../../data/questions';
-import { TestType } from '../../types/types';
+import { Test } from '../../types/types';
 import withUserData from '../../utils/withUserData';
 import PublicLayout from '../../layouts/PublicLayout/PublicLayout';
 
 export interface PropTypes {
-  testData: TestType[];
+  testData: Test[];
 }
 
 const Test = ({ testData }: PropTypes) => {
@@ -21,7 +21,7 @@ const Test = ({ testData }: PropTypes) => {
 };
 
 export async function getStaticProps() {
-  const testData = questions as TestType[];
+  const testData = questions as Test[];
 
   return {
     props: {

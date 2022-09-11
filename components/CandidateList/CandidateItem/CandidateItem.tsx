@@ -7,9 +7,9 @@ import CloseSVG from '../../SVG/CloseSVG';
 import FileSVG from '../../SVG/FileSVG';
 import CommentSVG from '../../SVG/CommentSVG';
 import { useDispatch } from 'react-redux';
-import { UserDataType } from '../../../types/types';
+import { UserData } from '../../../types/types';
 
-const CandidateItem = ({ data }: { data: UserDataType }) => {
+const CandidateItem = ({ data }: { data: UserData }) => {
   const [isComment, setIsComment] = useState(false);
   const [comment, setComment] = useState(data?.comment ? data?.comment : '');
   const dispatch = useDispatch();

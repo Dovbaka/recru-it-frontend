@@ -1,4 +1,4 @@
-import { TestType } from '../types/types';
+import { Test } from '../types/types';
 
 export const questions = [
     {
@@ -29,7 +29,7 @@ export const questions = [
     {
         id: '1Q3',
         question:
-            'Вам легко залишатися врівноваженим та сконцентрованим навіть у напруженій обстановці',
+            'Вам легко залишатися сконцентрованим навіть у напруженій обстановці',
         category: 'STRESS_TOLERANCE',
         answers: [
             { id: '1', text: 'Повністю згоден', value: 2 },
@@ -354,4 +354,4 @@ export const questions = [
             { id: '7', text: 'Не працював', value: 0 },
         ],
     }
-] as TestType[];
+] as Test[];

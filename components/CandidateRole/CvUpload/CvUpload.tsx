@@ -13,7 +13,7 @@ const CvUpload = ({}) => {
   const maxFileSize = 1000000;
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'application/*': ['.pdf', '.doc', '.docx'],
+      'text/*': ['.pdf', '.doc', '.docx'],
     },
     multiple: false,
     maxSize: maxFileSize,

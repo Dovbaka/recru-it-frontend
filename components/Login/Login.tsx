@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './Login.module.scss';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BackgroundSheet from '../BackgroundSheet/BackgroundSheet';
-import {Button, Grid, TextField, Typography} from '@mui/material';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { login } from '../../store/auth/actions';
+import { AppStateType } from '../../store/store';
+import { router } from 'next/client';
+import { useRouter } from 'next/router';
 
 type AdminSubmitForm = {
   email: string;
@@ -14,8 +18,10 @@ type AdminSubmitForm = {
 
 const Login = () => {
   //const authError = useSelector((state: AppStateType) => state.AuthReducer.errorMessage);
-  const isPending = false;
+  const isPending = useSelector((state: AppStateType) => state.AuthReducer.isPending);
+  const isAuth = useSelector((state: AppStateType) => state.AuthReducer.isAuth);
   const dispatch = useDispatch();
+  const router = useRouter();
   const validationSchema = Yup.object().shape({
     email: Yup.string().required('Required'),
     password: Yup.string().trim().required('Required'),
@@ -29,14 +35,17 @@ const Login = () => {
   });
 
   const onSubmit = (data: AdminSubmitForm) => {
-    //dispatch(loginAdmin(formik.values.email, formik.values.password));
-    console.log(data);
+    dispatch(login(data.email, data.password));
   };
 
   /*useEffect(()=>{
         if(authError) formik.setFieldError('email', 'Невірний логін або пароль');
         else (formik.setFieldError('email', ''));
     }, [authError])*/
+
+  useEffect(() => {
+    if (isAuth) router.replace('/admin/candidate-list');
+  }, [isAuth]);
 
   return (
     <BackgroundSheet>

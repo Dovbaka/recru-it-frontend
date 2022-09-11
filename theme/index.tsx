@@ -5,14 +5,14 @@ import palette from './palette';
 import typography from './typography';
 import components from './overrides';
 
-const MaterialUiTheme: FC<{ children: React.ReactNode }> = ({ children }) => {
-  const theme = createTheme({
-    components,
-    typography,
-    breakpoints,
-    palette,
-  });
+export const theme = createTheme({
+  components,
+  typography,
+  breakpoints,
+  palette,
+});
 
+const MaterialUiTheme: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -1,46 +1,57 @@
 import Question from './Question/Question';
-import React, { useRef } from 'react';
-import { Answer, TestType } from '../../types/types';
+import React, { useEffect, useRef } from 'react';
+import { Answer, Test } from '../../types/types';
 import classes from './Questionnaire.module.scss';
 import { Button, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../store/store';
 import { useRouter } from 'next/router';
 import { setProfileAnswers } from '../../store/recruit/actions';
+import { useSnackbar } from 'notistack';
 
 interface PropTypes {
-  testData: TestType[];
+  testData: Test[];
 }
 
 const Questionnaire = ({ testData }: PropTypes) => {
   const resultArray = useRef([] as Answer[]);
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   const userInfo = useSelector((state: AppStateType) => state.RecruitReducer.userInfo);
   const userRole = useSelector((state: AppStateType) => state.RecruitReducer.userRole);
   const userFile = useSelector((state: AppStateType) => state.RecruitReducer.userFile);
+  const testIsSent = useSelector((state: AppStateType) => state.RecruitReducer.testIsSent);
+  const isPending = useSelector((state: AppStateType) => state.RecruitReducer.isPending);
 
   const handleSubmit = () => {
-    const userId = userInfo.phone + '_' + Date.now();
-
     if (resultArray.current.length < testData.length) {
-      //setMessage(`You answered ${resultArray.length}/${testData.length} questions`);
+      console.log(resultArray.current)
+      enqueueSnackbar(`You answered ${resultArray.current.length}/${testData.length} questions`);
+      return;
     }
-    if (userRole && userFile) {
-      dispatch(
-        setProfileAnswers(
-          userInfo.firstName,
-          userInfo.lastName,
-          userInfo.email,
-          userInfo.phone,
-          userRole,
-          resultArray.current,
-          userFile,
-        ),
-      );
+    if (!userRole || !userFile) {
+      enqueueSnackbar(`Some data is missing`);
+      return;
     }
-    //router.push('/done');
+    dispatch(
+      setProfileAnswers(
+        userInfo.firstName,
+        userInfo.lastName,
+        userInfo.email,
+        userInfo.phone,
+        userRole,
+        resultArray.current,
+        userFile,
+      ),
+    );
   };
+
+  useEffect(() => {
+    if (testIsSent) {
+      router.push('/done');
+    }
+  }, [testIsSent]);
 
   return (
     <>
@@ -52,7 +63,9 @@ const Questionnaire = ({ testData }: PropTypes) => {
         ))}
       </Grid>
       <div className={classes.buttonBox}>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button variant={'contained'} onClick={handleSubmit} disabled={isPending}>
+          Submit
+        </Button>
       </div>
     </>
   );

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import AnswerCheckboxes from './AnswerCheckboxes/AnswerCheckboxes';
 import classes from './Question.module.scss';
-import { Answer, TestType } from '../../../types/types';
+import { Answer, Test } from '../../../types/types';
 import { RadioGroup, Typography } from '@mui/material';
 
 interface PropTypes {
-  testData: TestType;
+  testData: Test;
   resultArray: Omit<Answer, 'id'>[];
 }
 

@@ -4,7 +4,7 @@ import PolygonIcon from '../SVG/PolygonIcon';
 import CandidateItem from './CandidateItem/CandidateItem';
 import { useEffect, useState } from 'react';
 import { AppStateType } from '../../store/store';
-import { UserDataType } from '../../types/types';
+import { UserData } from '../../types/types';
 import { useDispatch, useSelector } from 'react-redux';
 import {getCandidates} from "../../store/recruit/actions";
 
@@ -39,7 +39,7 @@ const CandidateList = () => {
       setActiveButton({ index: index, inverted: false });
     }
   };
-  const sortItems = (variant: number, array: UserDataType[], inverted: boolean) => {
+  const sortItems = (variant: number, array: UserData[], inverted: boolean) => {
     if (!array.length) return array;
 
     const finalInverted = variant !== 4 ? inverted : !inverted;

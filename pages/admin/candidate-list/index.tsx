@@ -2,6 +2,7 @@ import React  from 'react';
 import classes from '../../../styles/Admin.module.scss';
 import AdminLayout from '../../../layouts/AdminLayout/AdminLayout';
 import CandidateList from '../../../components/CandidateList/CandidateList';
+import withAuthentication from "../../../utils/withAuthentication";
 
 const Admin = () => {
 
@@ -14,4 +15,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default withAuthentication(Admin);
