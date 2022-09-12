@@ -67,7 +67,7 @@ export interface RegisterRecruitResponse extends Answer {
   userId: string;
 }
 
-export interface GetRecruitListResponse extends RecruitData {
+export interface RecruitItemResponse extends RecruitData {
   createdDate: string;
   updatedDate: string;
   deletedDate: string | null;

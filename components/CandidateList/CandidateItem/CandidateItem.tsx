@@ -8,7 +8,7 @@ import FileSVG from '../../SVG/FileSVG';
 import CommentSVG from '../../SVG/CommentSVG';
 import { useDispatch } from 'react-redux';
 import { RecruitData } from '../../../interfaces/RecruitInterface';
-import { deleteCandidate } from '../../../store/recruit/actions';
+import { deleteCandidate, updateCandidate } from '../../../store/recruit/actions';
 import { v4 } from 'uuid';
 
 const CandidateItem = ({ data }: { data: RecruitData }) => {
@@ -29,6 +29,10 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
     }
   };
 
+  const handleUpdate = (status: string, comment: string) => {
+    dispatch(updateCandidate(data?.id, { status, comment }));
+  };
+
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this candidate?')) {
       dispatch(deleteCandidate(data?.id, data?.cvName));
@@ -44,6 +48,7 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
       <TextField
         fullWidth
         multiline
+        variant={'standard'}
         InputProps={{ disableUnderline: true }}
         placeholder="Comment..."
         className={classes.comment}
@@ -58,7 +63,7 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
         onClick={() => {
           setComment(comment);
           setIsComment(false);
-          //dispatch(setProfileComment(data?.id, comment));
+          handleUpdate(data?.status, comment);
         }}
         className={classes.saveButton + ' ' + (!comment || comment === data?.comment ? classes.disabled : '')}
       >
@@ -189,7 +194,7 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
             value={data?.status}
             id="grouped-select"
             onChange={e => {
-              //dispatch(setProfileStatus(data?.id, String(e.target.value)));
+              handleUpdate(String(e.target.value), data?.comment);
             }}
             displayEmpty
           >

@@ -11,6 +11,7 @@ import {
   SET_USER_FILE,
   SET_USER_INFO,
   SET_USER_ROLE,
+  UPDATE_CANDIDATE_SUCCESS,
 } from './actionTypes';
 import { RecruitData, RecruitInfo } from '../../interfaces/RecruitInterface';
 
@@ -78,6 +79,12 @@ const RecruitReducer = (state = initialState, action: RecruitActionsType) => {
       return {
         ...state,
         isPending: false,
+      };
+
+    case UPDATE_CANDIDATE_SUCCESS:
+      return {
+        ...state,
+        userData: state.userData.map(el => (el.id === action.payload.id ? { ...el, ...action.payload.data } : el)),
       };
 
     case DELETE_CANDIDATE_SUCCESS:

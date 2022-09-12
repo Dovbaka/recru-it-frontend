@@ -12,9 +12,12 @@ import {
   SET_USER_FILE,
   SET_USER_INFO,
   SET_USER_ROLE,
+  UPDATE_CANDIDATE_FAILED,
+  UPDATE_CANDIDATE_START,
+  UPDATE_CANDIDATE_SUCCESS,
 } from './actionTypes';
 import { AppStateType, InferActionsTypes } from '../store';
-import { Answer, GetRecruitListResponse, RecruitInfo } from '../../interfaces/RecruitInterface';
+import { Answer, RecruitItemResponse, RecruitData, RecruitInfo } from '../../interfaces/RecruitInterface';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import RecruitService from '../../services/RecruitService';
@@ -50,6 +53,21 @@ export const getCandidates = (): ThunkAction<void, AppStateType, unknown, AnyAct
   }
 };
 
+export const updateCandidate =
+  (
+    id: string,
+    { status, comment }: Pick<RecruitData, 'status' | 'comment'>,
+  ): ThunkAction<void, AppStateType, unknown, AnyAction> =>
+  async dispatch => {
+    try {
+      dispatch(actions.updateCandidatesStart());
+      const data = await RecruitService.updateRecruit(id, { status, comment });
+      return dispatch(actions.updateCandidatesSuccess(id, { status: data.data.status, comment: data.data.comment }));
+    } catch (err) {
+      return dispatch(actions.updateCandidatesFail());
+    }
+  };
+
 export const deleteCandidate =
   (id: string, fileName: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>
   async dispatch => {
@@ -71,12 +89,16 @@ export const actions = {
   setUserRole: (userRole: number) => ({ type: SET_USER_ROLE, payload: userRole } as const),
   setUserFile: (userFile: File) => ({ type: SET_USER_FILE, payload: userFile } as const),
   getCandidatesStart: () => ({ type: GET_CANDIDATES_DATA_START } as const),
-  getCandidatesSuccess: (data: GetRecruitListResponse[]) =>
+  getCandidatesSuccess: (data: RecruitItemResponse[]) =>
     ({ type: GET_CANDIDATES_DATA_SUCCESS, payload: data } as const),
   getCandidatesFail: () => ({ type: GET_CANDIDATES_DATA_FAILED } as const),
   deleteCandidatesStart: () => ({ type: DELETE_CANDIDATE_START } as const),
   deleteCandidatesSuccess: (id: string) => ({ type: DELETE_CANDIDATE_SUCCESS, payload: { id } } as const),
   deleteCandidatesFail: () => ({ type: DELETE_CANDIDATE_FAILED } as const),
+  updateCandidatesStart: () => ({ type: UPDATE_CANDIDATE_START } as const),
+  updateCandidatesSuccess: (id: string, data: Pick<RecruitData, 'status' | 'comment'>) =>
+    ({ type: UPDATE_CANDIDATE_SUCCESS, payload: { id, data } } as const),
+  updateCandidatesFail: () => ({ type: UPDATE_CANDIDATE_FAILED } as const),
   clearRecruit: () => ({ type: CLEAR_RECRUIT } as const),
 };
 

@@ -1,6 +1,12 @@
 import API from '../api/api';
 import { AxiosResponse } from 'axios';
-import { Answer, AwsResponse, GetRecruitListResponse, RegisterRecruitResponse } from '../interfaces/RecruitInterface';
+import {
+  Answer,
+  AwsResponse,
+  RecruitItemResponse,
+  RecruitData,
+  RegisterRecruitResponse,
+} from '../interfaces/RecruitInterface';
 
 export default class RecruitService {
   static async saveFileToS3(file: File): Promise<AxiosResponse<AwsResponse>> {
@@ -49,8 +55,15 @@ export default class RecruitService {
     });
   }
 
-  static async getRecruitList(): Promise<AxiosResponse<GetRecruitListResponse[]>> {
+  static async getRecruitList(): Promise<AxiosResponse<RecruitItemResponse[]>> {
     return await API.get('recruit');
+  }
+
+  static async updateRecruit(
+    id: string,
+    { status, comment }: Pick<RecruitData, 'status' | 'comment'>,
+  ): Promise<AxiosResponse<RecruitItemResponse>> {
+    return await API.patch(`recruit/${id}`, { status, comment });
   }
 
   static async deleteCv(fileName: string) {
