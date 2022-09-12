@@ -13,7 +13,7 @@ const CvUpload = ({}) => {
   const maxFileSize = 1000000;
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      'text/*': ['.pdf', '.doc', '.docx'],
+      'text/.pdf': ['.pdf'],
     },
     multiple: false,
     maxSize: maxFileSize,
@@ -25,7 +25,7 @@ const CvUpload = ({}) => {
         setDropzoneText('The file size must not exceed 1 MB');
       }
       if (fileRejections.length && fileRejections[0].errors[0].code === 'file-invalid-type') {
-        setDropzoneText('Only .pdf or .doc formats are acceptable');
+        setDropzoneText('Only .pdf format are acceptable');
       }
     },
     onDropAccepted: acceptedFiles => {

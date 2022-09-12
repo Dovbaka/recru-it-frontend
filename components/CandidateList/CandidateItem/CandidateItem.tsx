@@ -82,15 +82,13 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
         variant={'contained'}
         color={'primary'}
         type="submit"
-        disabled={!recruitComment || recruitComment === recruitComment}
+        disabled={!recruitComment || recruitComment === comment}
         onClick={() => {
           setRecruitComment(recruitComment);
           setIsComment(false);
           handleUpdate(status, recruitComment);
         }}
-        className={
-          classes.saveButton + ' ' + (!recruitComment || recruitComment === recruitComment ? classes.disabled : '')
-        }
+        className={classes.saveButton + ' ' + (!recruitComment || recruitComment === comment ? classes.disabled : '')}
       >
         <Typography style={{ fontSize: '18px' }}>Done</Typography>
       </Button>
