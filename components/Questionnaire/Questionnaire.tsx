@@ -26,7 +26,6 @@ const Questionnaire = ({ testData }: PropTypes) => {
 
   const handleSubmit = () => {
     if (resultArray.current.length < testData.length) {
-      console.log(resultArray.current)
       enqueueSnackbar(`You answered ${resultArray.current.length}/${testData.length} questions`);
       return;
     }

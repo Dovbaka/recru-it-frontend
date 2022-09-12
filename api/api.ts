@@ -41,7 +41,6 @@ API.interceptors.response.use(
       //if error = 401 and it's first retry
       originalRequest.__retry = true; //Set retry to true
       return AuthService.refreshToken(refreshToken).then(res => {
-        console.log(res);
         //refresh tokens request
         localStorage.setItem('userInfo', JSON.stringify({ access: res.data.access, refresh: refreshToken })); //Set new tokens in localStore
         store.dispatch(actions.refreshToken({ access: res.data.access, refresh: refreshToken })); //Set new tokens in state

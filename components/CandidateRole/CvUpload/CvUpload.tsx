@@ -21,7 +21,6 @@ const CvUpload = ({}) => {
       setIsDisabled(true);
     },
     onDropRejected: fileRejections => {
-      console.log(fileRejections);
       if (fileRejections.length && fileRejections[0].file.size > maxFileSize) {
         setDropzoneText('The file size must not exceed 1 MB');
       }

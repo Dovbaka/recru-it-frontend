@@ -2,14 +2,15 @@ import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { AppStateType, InferActionsTypes } from '../store';
 import {
-    CLEAR_ERRORS, INITIALIZE_APP,
-    LOG_OUT,
-    LOGIN_FAILURE,
-    LOGIN_START,
-    LOGIN_SUCCESS,
-    REFRESH_TOKEN,
-    REFRESH_TOKEN_FAILURE,
-    SET_AUTH,
+  CLEAR_ERRORS,
+  INITIALIZE_APP,
+  LOG_OUT,
+  LOGIN_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  REFRESH_TOKEN,
+  REFRESH_TOKEN_FAILURE,
+  SET_AUTH,
 } from './actionTypes';
 import AuthService from '../../services/AuthService';
 import { AuthResponse } from '../../interfaces/AuthInterface';
@@ -23,7 +24,6 @@ export const login =
       localStorage.setItem('userInfo', JSON.stringify(response.data));
       return dispatch(actions.loginSuccess(response.data));
     } catch (error) {
-        console.log(error);
       return dispatch(actions.loginFail(error));
     }
   };
