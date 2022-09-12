@@ -2,7 +2,7 @@ import React from 'react';
 import classes from '../../styles/Test.module.scss';
 import Questionnaire from '../../components/Questionnaire/Questionnaire';
 import { questions } from '../../data/questions';
-import { Test } from '../../types/types';
+import { Test } from '../../interfaces/RecruitInterface';
 import withUserData from '../../utils/withUserData';
 import PublicLayout from '../../layouts/PublicLayout/PublicLayout';
 

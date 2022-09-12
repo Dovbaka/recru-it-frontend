@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AnswerCheckboxes from './AnswerCheckboxes/AnswerCheckboxes';
 import classes from './Question.module.scss';
-import { Answer, Test } from '../../../types/types';
+import { Answer, Test } from '../../../interfaces/RecruitInterface';
 import { RadioGroup, Typography } from '@mui/material';
 
 interface PropTypes {

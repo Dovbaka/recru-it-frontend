@@ -12,7 +12,7 @@ import {
     SET_AUTH,
 } from './actionTypes';
 import AuthService from '../../services/AuthService';
-import { AuthResponse } from '../../types/types';
+import { AuthResponse } from '../../interfaces/AuthInterface';
 
 export const login =
   (email: string, password: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>
@@ -23,6 +23,7 @@ export const login =
       localStorage.setItem('userInfo', JSON.stringify(response.data));
       return dispatch(actions.loginSuccess(response.data));
     } catch (error) {
+        console.log(error);
       return dispatch(actions.loginFail(error));
     }
   };
@@ -39,7 +40,7 @@ export const refresh =
     }
   };
 
-//TODO: Provide types for arguments
+//TODO: Provide interfaces for arguments
 export const actions = {
   initializeApp: () => ({ type: INITIALIZE_APP } as const),
   loginStart: () => ({ type: LOGIN_START } as const),

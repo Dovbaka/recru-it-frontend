@@ -1,7 +1,7 @@
 import { AuthActionsType } from './actions';
 import jwt_decode from 'jwt-decode';
 import {CLEAR_ERRORS, INITIALIZE_APP, LOG_OUT, LOGIN_SUCCESS, SET_AUTH} from './actionTypes';
-import { AuthResponse, DecodedJwt } from '../../types/types';
+import { AuthResponse, DecodedJwt } from '../../interfaces/AuthInterface';
 
 const initialState = {
   initialized: false,

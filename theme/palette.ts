@@ -1,9 +1,9 @@
 const palette = {
     primary: {
-        main: '#727cf5',
-        light: '#5670DE',
-        disabled: '#B8BFF6',
-        hover: '#4e5bf2',
+        main: '#4285f4',
+        light: '#629efc',
+        disabled: '#b1ccfa',
+        hover: '#186efc',
         blue: '#455AB2',
     },
     secondary: {

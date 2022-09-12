@@ -1,11 +1,3 @@
-export interface Answer {
-  id: string;
-  question: string;
-  answerText: string;
-  answerValue: number;
-  category: CategoriesEnum;
-}
-
 export enum CategoriesEnum {
   EXPERIENCE = 'EXPERIENCE',
   QUALIFICATION = 'QUALIFICATION',
@@ -16,14 +8,22 @@ export enum CategoriesEnum {
   RATIONALITY = 'RATIONALITY',
 }
 
-export interface UserInfo {
+export interface RecruitInfo {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
 }
 
-export interface UserData {
+export interface Answer {
+  id: string;
+  question: string;
+  answerText: string;
+  answerValue: number;
+  category: CategoriesEnum;
+}
+
+export interface RecruitData {
   id: string;
   firstName: string;
   lastName: string;
@@ -34,6 +34,7 @@ export interface UserData {
   answers: Answer[];
   creationDate: Date;
   cvUrl: string;
+  cvName: string;
   comment: string;
   experience: number;
   qualification: number;
@@ -66,20 +67,8 @@ export interface RegisterRecruitResponse extends Answer {
   userId: string;
 }
 
-export interface GetRecruitListResponse extends UserData {
+export interface GetRecruitListResponse extends RecruitData {
   createdDate: string;
   updatedDate: string;
   deletedDate: string | null;
-}
-
-export interface DecodedJwt {
-  exp: number;
-  jti: string;
-  token_type: string;
-  user_id: number;
-}
-
-export interface AuthResponse {
-  access: string;
-  refresh: string;
 }

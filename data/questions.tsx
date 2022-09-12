@@ -1,4 +1,4 @@
-import { Test } from '../types/types';
+import { Test } from '../interfaces/RecruitInterface';
 
 export const questions = [
     {

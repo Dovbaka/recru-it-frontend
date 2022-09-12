@@ -1,6 +1,6 @@
 import API from '../api/api';
 import { AxiosResponse } from 'axios';
-import { Answer, AwsResponse, GetRecruitListResponse, RegisterRecruitResponse } from '../types/types';
+import { Answer, AwsResponse, GetRecruitListResponse, RegisterRecruitResponse } from '../interfaces/RecruitInterface';
 
 export default class RecruitService {
   static async saveFileToS3(file: File): Promise<AxiosResponse<AwsResponse>> {
@@ -15,7 +15,7 @@ export default class RecruitService {
     email: string,
     phoneNumber: string,
     role: number,
-    cvUrl: string,
+    cv: { Location: string; Key: string },
     answers: Answer[],
   ): Promise<AxiosResponse<RegisterRecruitResponse>> {
     return API.post('answer', {
@@ -42,13 +42,22 @@ export default class RecruitService {
           .reduce((sum, el) => sum + el.answerValue, 0),
         creativity: answers.filter(el => el.category === 'CREATIVITY').reduce((sum, el) => sum + el.answerValue, 0),
         rationality: answers.filter(el => el.category === 'RATIONALITY').reduce((sum, el) => sum + el.answerValue, 0),
-        cvUrl,
+        cvUrl: cv.Location,
+        cvName: cv.Key,
       },
       answersData: answers,
     });
   }
 
-  static async getRecruitList(): Promise<AxiosResponse<GetRecruitListResponse>> {
+  static async getRecruitList(): Promise<AxiosResponse<GetRecruitListResponse[]>> {
     return await API.get('recruit');
+  }
+
+  static async deleteCv(fileName: string) {
+    return await API.delete(`recruit/file/${fileName}`);
+  }
+
+  static async deleteRecruit(id: string) {
+    return await API.delete(`recruit/${id}`);
   }
 }

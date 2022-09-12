@@ -30,6 +30,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "sass": "^1.54.5",
+    "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
   },
   "devDependencies": {

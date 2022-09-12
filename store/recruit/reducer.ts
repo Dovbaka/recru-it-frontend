@@ -1,7 +1,7 @@
 import { RecruitActionsType } from './actions';
 import {
   CLEAR_RECRUIT,
-  CLEAR_SEARCH_PARAMS,
+  DELETE_CANDIDATE_SUCCESS,
   GET_CANDIDATES_DATA_FAILED,
   GET_CANDIDATES_DATA_START,
   GET_CANDIDATES_DATA_SUCCESS,
@@ -12,15 +12,15 @@ import {
   SET_USER_INFO,
   SET_USER_ROLE,
 } from './actionTypes';
-import { UserData, UserInfo } from '../../types/types';
+import { RecruitData, RecruitInfo } from '../../interfaces/RecruitInterface';
 
 const initialState = {
-  userInfo: {} as UserInfo,
+  userInfo: {} as RecruitInfo,
   userRole: null as number | null,
   userFile: null as File | null,
-  userData: [] as UserData[],
+  userData: [] as RecruitData[],
   testIsSent: false,
-  searchParams: undefined as UserData | null | undefined,
+  searchParams: undefined as RecruitData | null | undefined,
   isPending: false,
 };
 
@@ -41,11 +41,6 @@ const RecruitReducer = (state = initialState, action: RecruitActionsType) => {
       return {
         ...state,
         isPending: false,
-      };
-    case CLEAR_SEARCH_PARAMS:
-      return {
-        ...state,
-        searchParams: null,
       };
 
     case SET_USER_INFO:
@@ -83,6 +78,12 @@ const RecruitReducer = (state = initialState, action: RecruitActionsType) => {
       return {
         ...state,
         isPending: false,
+      };
+
+    case DELETE_CANDIDATE_SUCCESS:
+      return {
+        ...state,
+        userData: state.userData.filter(el => el.id !== action.payload.id),
       };
 
     case CLEAR_RECRUIT:

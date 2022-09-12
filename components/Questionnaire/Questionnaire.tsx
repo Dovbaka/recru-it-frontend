@@ -1,6 +1,6 @@
 import Question from './Question/Question';
 import React, { useEffect, useRef } from 'react';
-import { Answer, Test } from '../../types/types';
+import { Answer, Test } from '../../interfaces/RecruitInterface';
 import classes from './Questionnaire.module.scss';
 import { Button, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';

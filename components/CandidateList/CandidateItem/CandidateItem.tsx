@@ -7,9 +7,11 @@ import CloseSVG from '../../SVG/CloseSVG';
 import FileSVG from '../../SVG/FileSVG';
 import CommentSVG from '../../SVG/CommentSVG';
 import { useDispatch } from 'react-redux';
-import { UserData } from '../../../types/types';
+import { RecruitData } from '../../../interfaces/RecruitInterface';
+import { deleteCandidate } from '../../../store/recruit/actions';
+import { v4 } from 'uuid';
 
-const CandidateItem = ({ data }: { data: UserData }) => {
+const CandidateItem = ({ data }: { data: RecruitData }) => {
   const [isComment, setIsComment] = useState(false);
   const [comment, setComment] = useState(data?.comment ? data?.comment : '');
   const dispatch = useDispatch();
@@ -27,6 +29,12 @@ const CandidateItem = ({ data }: { data: UserData }) => {
     }
   };
 
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this candidate?')) {
+      dispatch(deleteCandidate(data?.id, data?.cvName));
+    }
+  };
+
   return isComment ? (
     <Grid
       container
@@ -37,7 +45,7 @@ const CandidateItem = ({ data }: { data: UserData }) => {
         fullWidth
         multiline
         InputProps={{ disableUnderline: true }}
-        placeholder="Коментар..."
+        placeholder="Comment..."
         className={classes.comment}
         value={comment}
         onChange={e => setComment(e.target.value)}
@@ -63,14 +71,7 @@ const CandidateItem = ({ data }: { data: UserData }) => {
           setIsComment(false);
         }}
       />
-      <DeleteSVG
-        className={classes.deleteIcon}
-        onClick={() => {
-          if (window.confirm('You sure you want to delete a candidate?')) {
-            //dispatch(deleteProfileData(data?.id, data?.fileName));
-          }
-        }}
-      />
+      <DeleteSVG className={classes.deleteIcon} onClick={handleDelete} />
     </Grid>
   ) : (
     <Grid
@@ -145,7 +146,7 @@ const CandidateItem = ({ data }: { data: UserData }) => {
           'Rationality',
           'Qualification',
           'Self sufficiency',
-          'StressTolerance',
+          'Stress tolerance',
           'Communicability',
         ].map(item => (
           <Grid item className={classes.textGridItem} key={item}>
@@ -156,41 +157,21 @@ const CandidateItem = ({ data }: { data: UserData }) => {
         ))}
       </Grid>
       <Grid container item xs={2} direction={'column'}>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap>{data?.experience.toFixed(2)}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap>{data?.creativity.toFixed(2)}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap>{data?.rationality.toFixed(2)}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap>{data?.qualification.toFixed(2)}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <div className={classes.infoBox}>
-            <Typography noWrap>{data?.selfSufficiency.toFixed(2)}</Typography>
-          </div>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <div className={classes.infoBox}>
-            <Typography noWrap>{data?.stressTolerance.toFixed(2)}</Typography>
-          </div>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <div className={classes.infoBox}>
-            <Typography noWrap>{data?.communicability.toFixed(2)}</Typography>
-          </div>
-        </Grid>
+        {[
+          data?.experience,
+          data?.creativity,
+          data?.rationality,
+          data?.qualification,
+          data?.selfSufficiency,
+          data?.stressTolerance,
+          data?.communicability,
+        ].map(item => (
+          <Grid item className={classes.textGridItem} key={v4()}>
+            <Box className={classes.infoBox}>
+              <Typography noWrap>{item?.toFixed(2)}</Typography>
+            </Box>
+          </Grid>
+        ))}
       </Grid>
       <Grid container item xs={3} direction={'column'} justifyContent={'space-between'}>
         <FormControl>
@@ -228,14 +209,7 @@ const CandidateItem = ({ data }: { data: UserData }) => {
             className={classes.commentIcon + ' ' + (data?.comment !== '' ? classes.typedCommentIcon : '')}
             onClick={() => setIsComment(true)}
           />
-          <DeleteSVG
-            className={classes.deleteIcon}
-            onClick={() => {
-              if (window.confirm('Ви певні, що хочете видалити кандидата?')) {
-                //dispatch(deleteProfileData(data?.id, data?.fileName));
-              }
-            }}
-          />
+          <DeleteSVG className={classes.deleteIcon} onClick={handleDelete} />
         </Box>
       </Grid>
     </Grid>
