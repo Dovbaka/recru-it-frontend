@@ -1,6 +1,5 @@
 import classes from './CandidateRole.module.scss';
 import React, {useEffect} from 'react';
-import withUserData from '../../utils/withUserData';
 import BackgroundSheet from '../BackgroundSheet/BackgroundSheet';
 import RoleBoxes from './RoleBoxes/RoleBoxes';
 import { Box, Typography } from '@mui/material';
@@ -16,7 +15,7 @@ const CandidateRole = () => {
 
   useEffect(() => {
     if (userRole && userFile) router.push('/test');
-  }, [userRole, userFile]);
+  }, [userRole, userFile, router]);
 
   return (
     <BackgroundSheet width={1100} height={835}>

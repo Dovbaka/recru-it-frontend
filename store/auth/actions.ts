@@ -14,6 +14,7 @@ import {
 } from './actionTypes';
 import AuthService from '../../services/AuthService';
 import { AuthResponse } from '../../interfaces/AuthInterface';
+import { AxiosError } from 'axios';
 
 export const login =
   (email: string, password: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>
@@ -23,8 +24,10 @@ export const login =
       const response = await AuthService.login(email, password);
       localStorage.setItem('userInfo', JSON.stringify(response.data));
       return dispatch(actions.loginSuccess(response.data));
-    } catch (error) {
-      return dispatch(actions.loginFail(error));
+    } catch (err) {
+      let errorText = 'An error occurred';
+      if (err instanceof AxiosError && err.response) errorText = err.response.data.message;
+      return dispatch(actions.loginFail(errorText));
     }
   };
 
@@ -45,7 +48,7 @@ export const actions = {
   initializeApp: () => ({ type: INITIALIZE_APP } as const),
   loginStart: () => ({ type: LOGIN_START } as const),
   loginSuccess: (payload: AuthResponse) => ({ type: LOGIN_SUCCESS, payload: payload } as const),
-  loginFail: (error: unknown) => ({ type: LOGIN_FAILURE, payload: error } as const),
+  loginFail: (error: string) => ({ type: LOGIN_FAILURE, payload: error } as const),
   logOut: () => ({ type: LOG_OUT } as const),
   refreshToken: (token: { access: string; refresh: string }) => ({ type: REFRESH_TOKEN, payload: token } as const),
   refreshTokenFail: () => ({ type: REFRESH_TOKEN_FAILURE } as const),

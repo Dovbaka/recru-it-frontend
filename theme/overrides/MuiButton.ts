@@ -6,9 +6,9 @@ const muiButton = {
       padding: '8px 16px',
       borderRadius: '3px',
       '&:disabled': {
-        borderColor: 'rgb(78, 91, 242, 0.5)',
-        backgroundColor: 'rgb(78, 91, 242, 0.3)',
-        color: 'rgb(78, 91, 242, 0.5)',
+        borderColor: palette.primary.main,
+        backgroundColor: palette.primary.disabled,
+        color: palette.primary.main,
       },
     },
 

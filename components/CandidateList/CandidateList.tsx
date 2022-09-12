@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { AppStateType } from '../../store/store';
 import { RecruitData } from '../../interfaces/RecruitInterface';
 import { useDispatch, useSelector } from 'react-redux';
-import {getCandidates} from "../../store/recruit/actions";
+import { getCandidates } from '../../store/recruit/actions';
 
 const CandidateList = () => {
   const [activeButton, setActiveButton] = useState({
@@ -15,22 +15,6 @@ const CandidateList = () => {
   });
   const dispatch = useDispatch();
   const data = useSelector((state: AppStateType) => state.RecruitReducer.userData);
-  const searchParams = useSelector((state: AppStateType) => state.RecruitReducer.searchParams);
-
-  const filterBySearchParams = () => {
-    if (searchParams)
-      return data.filter(
-        el =>
-          el.experience >= searchParams.experience &&
-          el.creativity >= searchParams.creativity &&
-          el.communicability >= searchParams.communicability &&
-          el.qualification >= searchParams.qualification &&
-          el.rationality >= searchParams.rationality &&
-          el.selfSufficiency >= searchParams.selfSufficiency &&
-          el.stressTolerance >= searchParams.stressTolerance,
-      );
-    else return data;
-  };
 
   const handleClick = (index: number) => {
     if (index === activeButton.index) {
@@ -39,6 +23,7 @@ const CandidateList = () => {
       setActiveButton({ index: index, inverted: false });
     }
   };
+
   const sortItems = (variant: number, array: RecruitData[], inverted: boolean) => {
     if (!array.length) return array;
 
@@ -92,21 +77,15 @@ const CandidateList = () => {
     });
   };
 
-  const [userData, setUserData] = useState(
-    sortItems(activeButton.index, filterBySearchParams(), activeButton.inverted),
-  );
+  const [userData, setUserData] = useState(sortItems(activeButton.index, data, activeButton.inverted));
+
+  useEffect(() => {
+    setUserData(sortItems(activeButton.index, data, activeButton.inverted));
+  }, [activeButton, data]);
 
   useEffect(() => {
     dispatch(getCandidates());
   }, []);
-
-  useEffect(() => {
-    if (searchParams) setActiveButton({ index: 5, inverted: true });
-  }, [searchParams]);
-
-  useEffect(() => {
-    setUserData(sortItems(activeButton.index, filterBySearchParams(), activeButton.inverted));
-  }, [activeButton, data]);
 
   return (
     <Box className={classes.contentBox}>
@@ -132,7 +111,7 @@ const CandidateList = () => {
       </Grid>
       <Grid container direction="column" justifyContent="flex-start" wrap="nowrap" className={classes.recruitItems}>
         {userData.map(el => (
-          <CandidateItem key={el?.id} data={el} />
+          <CandidateItem key={el.id} data={el} />
         ))}
       </Grid>
     </Box>

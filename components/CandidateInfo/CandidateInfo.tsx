@@ -7,7 +7,8 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { actions } from '../../store/recruit/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../store/store';
 
 type UserSubmitForm = {
   firstName: string;
@@ -27,12 +28,16 @@ const CandidateInfo: React.FC = () => {
     email: Yup.string().required('Email is required'),
     phone: Yup.string().trim().required('Required').matches(phoneRegExp, 'Phone number is not valid'),
   });
+  const userInfo = useSelector((state: AppStateType) => state.RecruitReducer.userInfo);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserSubmitForm>({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      ...userInfo,
+    },
   });
 
   const onSubmit = (data: UserSubmitForm) => {
@@ -100,7 +105,9 @@ const CandidateInfo: React.FC = () => {
           </Grid>
         </Grid>
         <div className={classes.buttonBox}>
-          <Button type={'submit'}>Next</Button>
+          <Button type={'submit'} variant={'contained'}>
+            Next
+          </Button>
         </div>
       </form>
     </BackgroundSheet>

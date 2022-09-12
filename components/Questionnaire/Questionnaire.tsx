@@ -50,7 +50,9 @@ const Questionnaire = ({ testData }: PropTypes) => {
     if (testIsSent) {
       router.push('/done');
     }
-  }, [testIsSent]);
+  }, [router, testIsSent]);
+
+  if (testIsSent) return <div />;
 
   return (
     <>

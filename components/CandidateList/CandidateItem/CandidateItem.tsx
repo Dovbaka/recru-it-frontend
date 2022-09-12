@@ -12,8 +12,28 @@ import { deleteCandidate, updateCandidate } from '../../../store/recruit/actions
 import { v4 } from 'uuid';
 
 const CandidateItem = ({ data }: { data: RecruitData }) => {
+  const {
+    id,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    role,
+    status,
+    creationDate,
+    cvUrl,
+    cvName,
+    comment,
+    experience,
+    qualification,
+    selfSufficiency,
+    stressTolerance,
+    communicability,
+    creativity,
+    rationality,
+  } = data;
   const [isComment, setIsComment] = useState(false);
-  const [comment, setComment] = useState(data?.comment ? data?.comment : '');
+  const [recruitComment, setRecruitComment] = useState(comment);
   const dispatch = useDispatch();
 
   const getRoleName = (role: number) => {
@@ -30,21 +50,24 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
   };
 
   const handleUpdate = (status: string, comment: string) => {
-    dispatch(updateCandidate(data?.id, { status, comment }));
+    dispatch(updateCandidate(id, { status, comment }));
   };
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this candidate?')) {
-      dispatch(deleteCandidate(data?.id, data?.cvName));
+      dispatch(deleteCandidate(id, cvName));
     }
   };
 
+  const rows = [
+    { title: 'Name', value: firstName + ' ' + lastName },
+    { title: 'Role', value: getRoleName(role) },
+    { title: 'Phone', value: '+' + phoneNumber },
+    { title: 'Email', value: email },
+  ];
+
   return isComment ? (
-    <Grid
-      container
-      className={classes.mainContainer}
-      style={data?.status === 'new' ? { border: '1px solid #4285F4' } : {}}
-    >
+    <Grid container className={classes.mainContainer} style={status === 'new' ? { border: '1px solid #4285F4' } : {}}>
       <TextField
         fullWidth
         multiline
@@ -52,27 +75,29 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
         InputProps={{ disableUnderline: true }}
         placeholder="Comment..."
         className={classes.comment}
-        value={comment}
-        onChange={e => setComment(e.target.value)}
+        value={recruitComment}
+        onChange={e => setRecruitComment(e.target.value)}
       />
       <Button
         variant={'contained'}
         color={'primary'}
         type="submit"
-        disabled={!comment || comment === data?.comment}
+        disabled={!recruitComment || recruitComment === recruitComment}
         onClick={() => {
-          setComment(comment);
+          setRecruitComment(recruitComment);
           setIsComment(false);
-          handleUpdate(data?.status, comment);
+          handleUpdate(status, recruitComment);
         }}
-        className={classes.saveButton + ' ' + (!comment || comment === data?.comment ? classes.disabled : '')}
+        className={
+          classes.saveButton + ' ' + (!recruitComment || recruitComment === recruitComment ? classes.disabled : '')
+        }
       >
-        <Typography style={{ fontSize: '18px' }}>Готово</Typography>
+        <Typography style={{ fontSize: '18px' }}>Done</Typography>
       </Button>
       <CloseSVG
         className={classes.closeIcon}
         onClick={() => {
-          setComment(data?.comment ? data?.comment : '');
+          setRecruitComment(recruitComment ? recruitComment : '');
           setIsComment(false);
         }}
       />
@@ -84,29 +109,16 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
       container
       xs={12}
       className={classes.mainContainer}
-      style={data?.status === 'aNew' ? { border: '1px solid #4285F4' } : {}}
+      style={status === 'aNew' ? { border: '1px solid #4285F4' } : {}}
     >
       <Grid container item xs={2} direction={'column'}>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.titleBox}>
-            <Typography variant={'body1'}>Name:</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.titleBox}>
-            <Typography variant={'body1'}>Role:</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.titleBox}>
-            <Typography variant={'body1'}>Phone:</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.titleBox}>
-            <Typography variant={'body1'}>Email:</Typography>
-          </Box>
-        </Grid>
+        {rows.map(item => (
+          <Grid item className={classes.textGridItem} key={v4()}>
+            <Box className={classes.titleBox}>
+              <Typography variant={'body1'}>{item.title + ':'}</Typography>
+            </Box>
+          </Grid>
+        ))}
         <Grid item className={classes.textGridItem} style={{ margin: 0 }}>
           <Box className={classes.titleBox}>
             <Typography variant={'body1'}>CV:</Typography>
@@ -114,31 +126,16 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
         </Grid>
       </Grid>
       <Grid container item xs={3} direction={'column'}>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap>{data?.firstName + ' ' + data?.lastName}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography>{getRoleName(data?.role)}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap>{'+' + data?.phoneNumber}</Typography>
-          </Box>
-        </Grid>
-        <Grid item className={classes.textGridItem}>
-          <Box className={classes.infoBox}>
-            <Typography noWrap className={classes.email}>
-              {data?.email}
-            </Typography>
-          </Box>
-        </Grid>
+        {rows.map(item => (
+          <Grid item className={classes.textGridItem} key={v4()}>
+            <Box className={classes.infoBox}>
+              <Typography noWrap>{item.value}</Typography>
+            </Box>
+          </Grid>
+        ))}
         <Grid item className={classes.textGridItem} style={{ margin: 0 }}>
           <div className={classes.infoBox}>
-            <a href={data.cvUrl} rel="noopener noreferrer" target="_blank">
+            <a href={cvUrl} rel="noopener noreferrer" target="_blank">
               <FileSVG />
             </a>
           </div>
@@ -162,21 +159,15 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
         ))}
       </Grid>
       <Grid container item xs={2} direction={'column'}>
-        {[
-          data?.experience,
-          data?.creativity,
-          data?.rationality,
-          data?.qualification,
-          data?.selfSufficiency,
-          data?.stressTolerance,
-          data?.communicability,
-        ].map(item => (
-          <Grid item className={classes.textGridItem} key={v4()}>
-            <Box className={classes.infoBox}>
-              <Typography noWrap>{item?.toFixed(2)}</Typography>
-            </Box>
-          </Grid>
-        ))}
+        {[experience, creativity, rationality, qualification, selfSufficiency, stressTolerance, communicability].map(
+          item => (
+            <Grid item className={classes.textGridItem} key={v4()}>
+              <Box className={classes.infoBox}>
+                <Typography noWrap>{item?.toFixed(2)}</Typography>
+              </Box>
+            </Grid>
+          ),
+        )}
       </Grid>
       <Grid container item xs={3} direction={'column'} justifyContent={'space-between'}>
         <FormControl>
@@ -185,33 +176,33 @@ const CandidateItem = ({ data }: { data: RecruitData }) => {
               Статус:
             </Typography>
             <Typography className={classes.dateText} variant={'body1'}>
-              {moment(data?.creationDate).format('DD/MM/YYYY')}
+              {moment(creationDate).format('DD/MM/YYYY')}
             </Typography>
           </Box>
           <Select
             style={{ width: '266px' }}
-            defaultValue={data?.status ? data?.status : 'aNew'}
-            value={data?.status}
+            defaultValue={status ? status : 'new'}
+            value={status}
             id="grouped-select"
             onChange={e => {
-              handleUpdate(String(e.target.value), data?.comment);
+              handleUpdate(String(e.target.value), recruitComment);
             }}
             displayEmpty
           >
             <MenuItem value={'new'} disabled>
-              Новий
+              New
             </MenuItem>
-            <MenuItem value={'no_status'}>Без статусу</MenuItem>
-            <MenuItem value={'no_Answer'}>Немає відповіді</MenuItem>
-            <MenuItem value={'sent_test_1'}>Тестове завдання</MenuItem>
-            <MenuItem value={'interview'}>Запрошений на співбесіду</MenuItem>
-            <MenuItem value={'declined'}>Відхилений</MenuItem>
-            <MenuItem value={'hired'}>Найнятий</MenuItem>
+            <MenuItem value={'no_status'}>No status</MenuItem>
+            <MenuItem value={'no_Answer'}>No answer</MenuItem>
+            <MenuItem value={'sent_test_1'}>Test sent</MenuItem>
+            <MenuItem value={'interview'}>Interview</MenuItem>
+            <MenuItem value={'declined'}>Declined</MenuItem>
+            <MenuItem value={'hired'}>Hired</MenuItem>
           </Select>
         </FormControl>
         <Box className={classes.controlIconBox}>
           <CommentSVG
-            className={classes.commentIcon + ' ' + (data?.comment !== '' ? classes.typedCommentIcon : '')}
+            className={classes.commentIcon + ' ' + (recruitComment !== '' ? classes.typedCommentIcon : '')}
             onClick={() => setIsComment(true)}
           />
           <DeleteSVG className={classes.deleteIcon} onClick={handleDelete} />

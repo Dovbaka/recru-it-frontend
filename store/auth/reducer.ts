@@ -1,6 +1,14 @@
 import { AuthActionsType } from './actions';
 import jwt_decode from 'jwt-decode';
-import {CLEAR_ERRORS, INITIALIZE_APP, LOG_OUT, LOGIN_SUCCESS, SET_AUTH} from './actionTypes';
+import {
+  CLEAR_ERRORS,
+  INITIALIZE_APP,
+  LOG_OUT,
+  LOGIN_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  SET_AUTH,
+} from './actionTypes';
 import { AuthResponse, DecodedJwt } from '../../interfaces/AuthInterface';
 
 const initialState = {
@@ -29,6 +37,12 @@ const AuthReducer = (state = initialState, action: AuthActionsType) => {
         userId,
       };
     }
+    case LOGIN_START: {
+      return {
+        ...state,
+        isPending: true,
+      };
+    }
     case LOGIN_SUCCESS: {
       const decodedToken = jwt_decode<DecodedJwt>(action.payload.access);
       const userId = decodedToken?.user_id;
@@ -37,7 +51,14 @@ const AuthReducer = (state = initialState, action: AuthActionsType) => {
         token: action.payload,
         isAuth: true,
         userId: userId,
-        codeError: '',
+        isPending: false,
+      };
+    }
+    case LOGIN_FAILURE: {
+      return {
+        ...state,
+        errorMessage: action.payload,
+        isPending: false,
       };
     }
     case CLEAR_ERRORS: {

@@ -6,9 +6,8 @@ import BackgroundSheet from '../BackgroundSheet/BackgroundSheet';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { login } from '../../store/auth/actions';
+import { actions, login } from '../../store/auth/actions';
 import { AppStateType } from '../../store/store';
-import { router } from 'next/client';
 import { useRouter } from 'next/router';
 
 type AdminSubmitForm = {
@@ -17,7 +16,7 @@ type AdminSubmitForm = {
 };
 
 const Login = () => {
-  //const authError = useSelector((state: AppStateType) => state.AuthReducer.errorMessage);
+  const authError = useSelector((state: AppStateType) => state.AuthReducer.errorMessage);
   const isPending = useSelector((state: AppStateType) => state.AuthReducer.isPending);
   const isAuth = useSelector((state: AppStateType) => state.AuthReducer.isAuth);
   const dispatch = useDispatch();
@@ -29,23 +28,27 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<AdminSubmitForm>({
     resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = (data: AdminSubmitForm) => {
+    dispatch(actions.clearErrors());
     dispatch(login(data.email, data.password));
   };
 
-  /*useEffect(()=>{
-        if(authError) formik.setFieldError('email', 'Невірний логін або пароль');
-        else (formik.setFieldError('email', ''));
-    }, [authError])*/
+  useEffect(() => {
+    if (authError) {
+      setError('email', { type: 'custom', message: authError });
+      setError('password', { type: 'custom', message: authError });
+    }
+  }, [authError, setError]);
 
   useEffect(() => {
     if (isAuth) router.replace('/admin/candidate-list');
-  }, [isAuth]);
+  }, [isAuth, router]);
 
   return (
     <BackgroundSheet>
@@ -86,8 +89,7 @@ const Login = () => {
               variant={'contained'}
               color={'primary'}
               type="submit"
-              // disabled={props.disabled}
-              className={classes.customButton + ' ' + (isPending ? classes.pending : '')}
+              className={classes.customButton}
               disabled={isPending}
             >
               Sign in

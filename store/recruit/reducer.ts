@@ -21,7 +21,6 @@ const initialState = {
   userFile: null as File | null,
   userData: [] as RecruitData[],
   testIsSent: false,
-  searchParams: undefined as RecruitData | null | undefined,
   isPending: false,
 };
 
