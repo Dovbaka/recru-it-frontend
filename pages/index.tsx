@@ -5,9 +5,9 @@ import CandidateInfo from '../components/CandidateInfo/CandidateInfo';
 
 const Home: NextPage = () => {
   return (
-    <PublicLayout>
+    <PublicLayout data-testid="public-layout">
       <section className={classes.infoSection}>
-        <CandidateInfo />
+        <CandidateInfo data-testid="candidate-info"/>
       </section>
     </PublicLayout>
   );
