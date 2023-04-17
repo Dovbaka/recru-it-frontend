@@ -21,6 +21,11 @@ export default function MyApp({ Component, emotionCache = clientSideEmotionCache
   React.useEffect(() => {
     //Get token form localStorage and initialize app
     const localData = localStorage.getItem('userInfo');
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+
     if (localData) {
       store.dispatch(actions.setAuth(JSON.parse(localData)));
     }
